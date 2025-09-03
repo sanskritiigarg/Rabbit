@@ -49,13 +49,6 @@ const ProductDetails = () => {
       images: [{url: 'https://picsum.photos/500/500?random=8',
             altText: "Stylish Top",}]
     },
-    {
-      _id: 4,
-      name: 'Stylish Top',
-      price: 100,
-      images: [{url: 'https://picsum.photos/500/500?random=9',
-            altText: "Stylish Top",}]
-    }
   ]
 
   const [mainImage, setMainImage] = useState('')

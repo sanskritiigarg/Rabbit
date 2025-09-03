@@ -29,7 +29,7 @@ const FeaturedSection = () => {
                     45 DAYS RETURN
                 </h4>
                 <p className='tracking-tighter text-sm text-gray-600'>
-                    Moneyback guurantee
+                    Moneyback guarantee
                 </p>
             </div>
 

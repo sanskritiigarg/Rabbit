@@ -17,13 +17,6 @@ const Home = () => {
             altText: "Stylish Top",}]
     },
     {
-      _id: 2,
-      name: 'Stylish Top',
-      price: 100,
-      images: [{url: 'https://picsum.photos/500/500?random=6',
-            altText: "Stylish Top",}]
-    },
-    {
       _id: 3,
       name: 'Stylish Top',
       price: 100,
@@ -49,13 +42,6 @@ const Home = () => {
       name: 'Stylish Top',
       price: 100,
       images: [{url: 'https://picsum.photos/500/500?random=6',
-            altText: "Stylish Top",}]
-    },
-    {
-      _id: 3,
-      name: 'Stylish Top',
-      price: 100,
-      images: [{url: 'https://picsum.photos/500/500?random=8',
             altText: "Stylish Top",}]
     },
     {
