@@ -3,7 +3,6 @@ import {FaFilter} from 'react-icons/fa'
 import FilterSidebar from '../components/Products/FilterSidebar'
 import SortOptions from '../components/Products/SortOptions'
 import ProductGrid from '../components/Products/ProductGrid'
-import SortSidebar from '../components/Products/SortSidebar'
 
 
 const CollectionPage = () => {
@@ -157,8 +156,8 @@ const CollectionPage = () => {
       </div>
 
       {/*Sort sidebar */}
-      <div ref={sortbarRef} className={`${isSortbarOpen ? 'translate-y-0' : 'translate-y-full'} bottom-0 left-0 right-0 fixed w-full bg-white z-100 h-1/3 transition-transform duration-200`}>
-        <SortSidebar/>
+      <div ref={sortbarRef} className={`${isSortbarOpen ? 'translate-y-0' : 'translate-y-full'} bottom-0 left-0 right-0 fixed w-full bg-white z-100 h-xl transition-transform duration-200`}>
+        <SortOptions/>
       </div>
 
       <div className='flex-grow p-4'>

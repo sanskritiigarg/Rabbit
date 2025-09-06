@@ -57,7 +57,7 @@ const Navbar = () => {
     <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />
 
       {/*Mobile Navigation */}
-        <div className={`fixed top-0 left-0 w-3/4 sm:w-1/2 md:w-1/3 h-full transform transition-transform duration-300z-50 bg-white shadow-lg ${navDrawerOpen? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`fixed top-0 left-0 w-3/4 z-50 sm:w-1/2 md:w-1/3 h-full transform transition-transform duration-300z-50 bg-white shadow-lg ${navDrawerOpen? "translate-x-0" : "-translate-x-full"}`}>
           <div className='flex justify-end p-4'>
             <button onClick={toggleNavDrawer}>
               <HiMiniXMark className='h-6 w-6 text-gray-500'/>
