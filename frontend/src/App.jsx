@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import CollectionPage from './pages/CollectionPage'
 import ProductDetails from './components/Products/ProductDetails'
 import Checkout from './components/Cart/Checkout'
+import OrderConfirmation from './pages/OrderConfirmation'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
         <Route path='collection/:collection' element={<CollectionPage/>}/>
         <Route path='products/:id' element={<ProductDetails/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/order-confirmation' element={<OrderConfirmation/>} />
       </Route>
       <Route>{/* Admin Layout */}</Route>
     </Routes>
