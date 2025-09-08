@@ -87,30 +87,30 @@ const ProductDetails = () => {
   return (
     <div className='p-6'>
       <div className='max-w-6xl mx-auto bg-white p-8 rounded-lg'>
-        <div className='flex flex-col md:flex-row'>
+        <div className='flex flex-col lg:flex-row'>
           {/*Left Thumbnails */}
-          <div className='hidden md:flex flex-col space-y-4 mr-6'>
+          <div className='hidden lg:flex flex-col space-y-4 mr-6'>
             {selectedProduct.images.map((image, index) => 
               <img src={image.url} alt={image.altText || `Thumbnail ${index}`} key={index} className={`w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${mainImage === image.url ? "border-black" : "border-white"}`} onClick={() => {setMainImage(image.url)}}/>
             )}
           </div>
 
           {/*Main image */}
-          <div className='md:w-1/2'>
+          <div className='lg:w-1/2'>
             <div className='mb-4'>
               <img src={mainImage} alt="Main Product" className='w-full h-auto object-cover rounded-lg' />
             </div>
           </div>
 
           {/*Mobile thumbnail */}
-          <div className='md:hidden flex overscroll-x-auto space-x-4 mb-4'>
+          <div className='lg:hidden flex overscroll-x-auto space-x-4 mb-4'>
               {selectedProduct.images.map((image, index) => 
               <img src={image.url} alt={image.altText || `Thumbnail ${index}`} key={index} className={`w-20 h-20 object-cover rounded-lg cursor-pointer border-2 ${mainImage === image.url ? "border-black" : "border-white"}`} onClick={() => {setMainImage(image.url)}}/>
             )}
           </div>
 
           {/*Product details on right */}
-            <div className='md:w-1/2 md:ml-10'>
+            <div className='lg:w-1/2 lg:ml-10'>
               <h1 className='text-2xl md:text-3xl font-semibold mb-2'>
                 {selectedProduct.name}
               </h1>
@@ -151,7 +151,7 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              <button className={`bg-black text-white py-2 px-6 rounded mb-4 w-sm ${ATCBtnDisabled ? 'cursor-not-allowed opacity-50' : 'hover:bg-gray-800'}`} onClick={handleAddToCart} disabled={ATCBtnDisabled}>
+              <button className={`bg-black text-white py-2 px-6 rounded mb-4 w-full ${ATCBtnDisabled ? 'cursor-not-allowed opacity-50' : 'hover:bg-gray-800'}`} onClick={handleAddToCart} disabled={ATCBtnDisabled}>
                 {ATCBtnDisabled ? 'Adding to Cart' : 'Add to Cart'}</button>
             </div>
         </div>

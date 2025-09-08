@@ -39,19 +39,20 @@ const Navbar = () => {
         </div>
         {/*Icons */}
         <div className='flex items-center space-x-4'>
-            <Link to='/profile'>
-            <HiOutlineUser className='h-6 w-6 text-gray-700 hover:text-black'/></Link>
-            
-            <button onClick={toggleCartDrawer} className='relative hover:text-black'>
-              <HiOutlineShoppingBag className='h-6 w-6 text-gray-700'/>
-              <span className='bg-rabbit-red py-0.5 px-2 rounded-full text-white text-xs absolute -top-1'>
-                4</span>
-            </button>
-            <div className='overflow-hidden'>
-              <SearchBar/>
-            </div>
-            
-            <button className='md:hidden' onClick={toggleNavDrawer}><HiBars3BottomRight className='h-6 w-6 text-gray-700'/></button>
+          <Link to={'/admin'} className='block bg-black text-white rounded-lg text-sm p-1'>Admin</Link>
+          <Link to='/profile'>
+          <HiOutlineUser className='h-6 w-6 text-gray-700 hover:text-black'/></Link>
+          
+          <button onClick={toggleCartDrawer} className='relative hover:text-black'>
+            <HiOutlineShoppingBag className='h-6 w-6 text-gray-700'/>
+            <span className='bg-rabbit-red py-0.5 px-2 rounded-full text-white text-xs absolute -top-1'>
+              4</span>
+          </button>
+          <div className='overflow-hidden'>
+            <SearchBar/>
+          </div>
+          
+          <button className='md:hidden' onClick={toggleNavDrawer}><HiBars3BottomRight className='h-6 w-6 text-gray-700'/></button>
         </div>
     </nav>
     <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />

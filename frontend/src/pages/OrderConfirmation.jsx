@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 const checkout = {
   _id: '123123',
@@ -75,7 +76,7 @@ const OrderConfirmation = () => {
           </div>
 
           {/* Payment and Delivery Info */}
-          <div className='grid grid-cols-2 gap-8'>
+          <div className='grid grid-cols-2 gap-8 mb-6'>
             {/* Payment info */}
             <div>
               <h4 className='text-lg
@@ -88,6 +89,8 @@ const OrderConfirmation = () => {
               <p className='text-gray-600'>{checkout.shippingAddress.city},{checkout.shippingAddress.country} </p>
             </div>
           </div>
+
+          <p><Link to={'/my-orders'} className=' text-blue-600 hover:underline'>Go to all orders</Link></p>
       </div>
       )}
     </div>

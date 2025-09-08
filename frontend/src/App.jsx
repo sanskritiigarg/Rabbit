@@ -10,6 +10,9 @@ import CollectionPage from './pages/CollectionPage'
 import ProductDetails from './components/Products/ProductDetails'
 import Checkout from './components/Cart/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
+import OrderDetailsPage from './pages/OrderDetailsPage'
+import MyOrdersPage from './pages/MyOrdersPage'
+import AdminLayout from './components/Admin/AdminLayout'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,8 +30,12 @@ function App() {
         <Route path='products/:id' element={<ProductDetails/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
         <Route path='/order-confirmation' element={<OrderConfirmation/>} />
+        <Route path='/order/:id' element={<OrderDetailsPage/>} />
+        <Route path='my-orders' element={<MyOrdersPage/>}/>
       </Route>
-      <Route>{/* Admin Layout */}</Route>
+      <Route path='/admin/' element={<AdminLayout/>}>
+
+      </Route>
     </Routes>
     </BrowserRouter>
   )
