@@ -160,6 +160,14 @@ const CollectionPage = () => {
         <SortOptions/>
       </div>
 
+      {isFilterbarOpen && (
+        <div className='fixed inset-0 z-10 bg-black/50 md:hidden' onClick={toggleFilterbar}></div>
+      )}
+
+      {isSortbarOpen && (
+        <div className='fixed inset-0 z-10 bg-black/50 md:hidden' onClick={toggleSortbar}></div>
+      )}
+
       <div className='flex-grow p-4'>
         <h2 className='text-2xl uppercase mb-4 px-4'>All Collection</h2>
         <div className='hidden lg:block'>
