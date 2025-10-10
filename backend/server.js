@@ -24,7 +24,11 @@ import checkoutRoutes from "./routes/checkout.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import subscriberRoutes from "./routes/subscriber.routes.js";
+import adminUserRoutes from "./routes/adminUser.routes.js";
+import adminProductRoutes from "./routes/adminProducts.routes.js";
+import adminOrderRoutes from "./routes/adminOrder.routes.js";
 
+// User Routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
@@ -33,6 +37,10 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", subscriberRoutes);
 
+// Admin Routes
+app.use("/api/admin/users", adminUserRoutes);
+app.use("/api/admin/products", adminProductRoutes);
+app.use("/api/admin/orders", adminOrderRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
