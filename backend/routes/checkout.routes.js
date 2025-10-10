@@ -12,11 +12,11 @@ router.post("/", auth, createCheckoutSession);
 // @route PUT /api/checkout/:id/pay
 // @desc Update payment status after succesful payment
 // @access Private
-router.put("/:id/pay", updatePayment);
+router.put("/:id/pay", auth, updatePayment);
 
 // @route POST /api/checkout/:id/finalize
 // @desc Finalize checkout and convert it into order
 // @access Private
-router.post("/:id/finalize", finalizeCheckout);
+router.post("/:id/finalize", auth, finalizeCheckout);
 
 export default router;
