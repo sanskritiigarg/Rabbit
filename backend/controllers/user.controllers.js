@@ -1,28 +1,28 @@
-import {User} from "../models/user.models.js"
-import jwt from "jsonwebtoken";
+import { User } from '../models/user.models.js';
+import jwt from 'jsonwebtoken';
 
 const generateToken = (user) => {
   // Create a JWT payload
-  const payload = {user: {_id: user._id, role: user.role}};
+  const payload = { user: { _id: user._id, role: user.role } };
 
   // Sign and send token with user data
-  return jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "40h"});
-}
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '40h' });
+};
 
 const registerUser = async (req, res) => {
-  const {name, email, password} = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    let user = await User.findOne({email});
+    let user = await User.findOne({ email });
 
-    if (user) return res.status(400).json({message: "User already exists"});
+    if (user) return res.status(400).json({ message: 'User already exists' });
 
-    user = new User({name, email, password});
+    user = new User({ name, email, password });
     await user.save();
 
     const token = generateToken(user);
 
-    if (!token) throw new Error("Token generation failed");
+    if (!token) throw new Error('Token generation failed');
 
     res.status(201).json({
       user: {
@@ -31,29 +31,27 @@ const registerUser = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-    token,
+      token,
     });
-
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({ message: 'Server Error' });
   }
-}
+};
 
 const loginUser = async (req, res) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
 
-    if (!user) return res.status(400).json("Invalid Credentials");
+    if (!user) return res.status(400).json({ message: 'Invalid Credentials' });
     const isMatch = await user.matchPassword(password);
 
-    if (!isMatch) return res.status(400).json("Invalid Credentials");
-
+    if (!isMatch) return res.status(400).json({ message: 'Invalid Credentials' });
 
     const token = generateToken(user);
 
-    if (!token) throw new Error("Token generation failed");
+    if (!token) throw new Error('Token generation failed');
 
     res.json({
       user: {
@@ -62,20 +60,16 @@ const loginUser = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-    token,
+      token,
     });
-
   } catch (error) {
-
     console.error(error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ message: 'Server Error' });
   }
-}
+};
 
 const getProfile = async (req, res) => {
   res.json(req.user);
-}
+};
 
-export {registerUser,
-    loginUser,
-    getProfile}
+export { registerUser, loginUser, getProfile };

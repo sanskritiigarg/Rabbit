@@ -7,6 +7,7 @@ The **backend** is not yet implemented (placeholder folder exists).
 ---
 
 ## Features
+
 - Responsive design (mobile-friendly)
 - Add to cart functionality
 - Search bar with live results
@@ -15,12 +16,14 @@ The **backend** is not yet implemented (placeholder folder exists).
 ---
 
 ## Tech Stack
+
 - **Frontend:** React, Vite, CSS
 - **State Management:** (to be added later, e.g., Redux Toolkit)
 - **Backend:** (coming soon – Node.js + Express)
 - **Database:** (planned – MongoDB)
 
 ## Project Structure
+
 ```
 Rabbit/
 ├── frontend/ # React + Vite frontend
@@ -32,6 +35,7 @@ Rabbit/
 ```
 
 ## Getting Started
+
 Clone the repo and install dependencies:
 
 ```bash
@@ -47,6 +51,7 @@ npm run dev
 ```
 
 ## Status
+
 - Frontend (in progress)
 - Backend (to be added)
 - Database integration

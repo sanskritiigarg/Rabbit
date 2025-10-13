@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const subscriberSchema = new mongoose.Schema({
   email: {
@@ -11,7 +11,7 @@ const subscriberSchema = new mongoose.Schema({
   subscribedAt: {
     type: Date,
     default: Date.now(),
-  }
+  },
 });
 
-export const Subscriber = mongoose.model("Subscriber", subscriberSchema);
+export const Subscriber = mongoose.model('Subscriber', subscriberSchema);

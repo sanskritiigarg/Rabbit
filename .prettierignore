@@ -1,0 +1,10 @@
+# Ignore build/dist folders
+/dist
+/build
+/frontend/dist
+/frontend/node_modules
+/backend/node_modules
+/backend/dist
+
+# Ignore dependency folders
+/node_modules
