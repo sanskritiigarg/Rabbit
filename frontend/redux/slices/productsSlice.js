@@ -69,7 +69,9 @@ export const updateProduct = createAsyncThunk(
 export const fetchSimilarProducts = createAsyncThunk(
   'products/fetchSimilarProducts',
   async ({ id }) => {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products?${id}`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`,
+    );
 
     return response.data;
   },

@@ -55,7 +55,7 @@ export const updateCartItemQuantity = createAsyncThunk(
   'cart/updateCartItemQuantity',
   async ({ productId, quantity, color, size, guestId, userId }, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`${import.meta.get.VITE_BACKEND_URL}/api/cart`, {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         productId,
         quantity,
         color,
@@ -116,7 +116,7 @@ export const mergeCart = createAsyncThunk(
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    cart: loadCartFromStorage,
+    cart: loadCartFromStorage(),
     loading: false,
     error: null,
   },
