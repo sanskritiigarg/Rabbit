@@ -72,7 +72,7 @@ const products = [
     gender: 'Men',
     images: [
       {
-        url: './',
+        url: 'https://images.pexels.com/photos/10213906/pexels-photo-10213906.jpeg',
         altText: 'Casual Denim Shirt Front View',
       },
       {
