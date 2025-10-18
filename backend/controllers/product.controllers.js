@@ -230,7 +230,7 @@ const getProductsByCategory = async (req, res) => {
 
     res.json(products);
   } catch (error) {
-    console.error('Error');
+    console.log(error);
     res.status(500).json({ message: 'Server Error' });
   }
 };
@@ -244,8 +244,8 @@ const getProductByID = async (req, res) => {
     } else {
       res.status(404).json({ message: 'Product not found' });
     }
-  } catch {
-    console.error('Server Error');
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'Server Error' });
   }
 };
@@ -262,10 +262,11 @@ const getSimilarProducts = async (req, res) => {
       _id: { $ne: id },
       category: product.category,
       gender: product.gender,
-    }).limit(4);
+    }).limit(3);
 
     res.json(similarProducts);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'Server Error' });
   }
 };

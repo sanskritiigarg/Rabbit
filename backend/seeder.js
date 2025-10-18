@@ -7,10 +7,9 @@ import { Cart } from './models/cart.models.js';
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI);
-
 const seedData = async () => {
   try {
+    await mongoose.connect(process.env.MONGO_URI);
     await Product.deleteMany();
     await User.deleteMany();
     await Cart.deleteMany();
@@ -36,7 +35,7 @@ const seedData = async () => {
 
     process.exit();
   } catch (error) {
-    console.error('Error data succeeded successfully');
+    console.error('Error', error);
     process.exit(1);
   }
 };

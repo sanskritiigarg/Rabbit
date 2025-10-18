@@ -10,7 +10,6 @@ import {
   getNewArrivals,
 } from '../controllers/product.controllers.js';
 import { admin, auth } from '../middlewares/auth.middlewares.js';
-import { get } from 'mongoose';
 
 const router = express.Router();
 
