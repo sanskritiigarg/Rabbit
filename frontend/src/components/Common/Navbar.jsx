@@ -32,18 +32,27 @@ const Navbar = () => {
         {/*Categories Navigation Link */}
         <div className="hidden md:flex space-x-6">
           <Link
-            to="collection/all"
+            to="collection/all?gender=Men"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Men
           </Link>
-          <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
-            WoMen
+          <Link
+            to="collection/all?gender=Women"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
+            Women
           </Link>
-          <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
+          <Link
+            to="collection/all?category=Top+Wear"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
             TopWear
           </Link>
-          <Link to="#" className="text-gray-700 hover:text-black text-sm font-medium uppercase">
+          <Link
+            to="collection/all?category=Bottom+Wear"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
             Bottom Wear
           </Link>
         </div>
@@ -75,27 +84,43 @@ const Navbar = () => {
 
       {/*Mobile Navigation */}
       <div
-        className={`fixed top-0 left-0 w-3/4 z-50 sm:w-1/2 md:w-1/3 h-full transform transition-transform duration-300z-50 bg-white shadow-lg ${navDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed top-0 left-0 w-1/2 z-50 md:w-1/3 h-full transform transition-transform duration-300z-50 bg-white shadow-lg ${navDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex justify-end p-4">
           <button onClick={toggleNavDrawer}>
-            <HiMiniXMark className="h-6 w-6 text-gray-500" />
+            <HiMiniXMark className="h-8 w-8 text-gray-500" />
           </button>
         </div>
         <div className="p-4">
           <h2 className="text-xl font-semibold mb-4">Menu</h2>
-          <nav className="space-y-2">
-            <Link to="#" className="block text-gray-600 hover:text-black" onClick={toggleNavDrawer}>
+          <nav className="space-y-2 text-lg">
+            <Link
+              to="collection/all?gender=Men"
+              className="block text-gray-600 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
               Men
             </Link>
-            <Link to="#" className="block text-gray-600 hover:text-black" onClick={toggleNavDrawer}>
+            <Link
+              to="collection/all?gender=Women"
+              className="block text-gray-600 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
               Women
             </Link>
-            <Link to="#" className="block text-gray-600 hover:text-black" onClick={toggleNavDrawer}>
-              BottomWear
+            <Link
+              to="collection/all?category=Bottom+Wear"
+              className="block text-gray-600 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              Bottom Wear
             </Link>
-            <Link to="#" className="block text-gray-600 hover:text-black" onClick={toggleNavDrawer}>
-              TopWear
+            <Link
+              to="collection/all?category=Top+Wear"
+              className="block text-gray-600 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              Top Wear
             </Link>
           </nav>
         </div>

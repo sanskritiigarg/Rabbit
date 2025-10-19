@@ -3,15 +3,27 @@ import { FaFilter } from 'react-icons/fa';
 import FilterSidebar from '../components/Products/FilterSidebar';
 import SortOptions from '../components/Products/SortOptions';
 import ProductGrid from '../components/Products/ProductGrid';
+import { useSearchParams, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductsByFilters } from '../../redux/slices/productsSlice';
 
 const CollectionPage = () => {
-  const [products, setProducts] = useState([]);
   const [isFilterbarOpen, setIsFilterbarOpen] = useState(false);
   const [isSortbarOpen, setIsSortbarOpen] = useState(false);
   const filterbarRef = useRef(null);
   const filterBtnRef = useRef(null);
   const sortbarRef = useRef(null);
   const sortBtnRef = useRef(null);
+
+  const { collection } = useParams(); // object of filters
+  const [searchParams] = useSearchParams(); // query given in search
+  const queryParams = Object.fromEntries([...searchParams]); // convert iterable [key,value] pair to js objects
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProductsByFilters({ collection, ...queryParams }));
+  }, [dispatch, collection, searchParams]);
 
   const toggleFilterbar = (e) => {
     e.stopPropagation();
@@ -52,95 +64,14 @@ const CollectionPage = () => {
     };
   }, [isFilterbarOpen]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      const fetchedProducts = [
-        {
-          _id: 1,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=7', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 2,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=6', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 3,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=8', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 4,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=9', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 1,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=7', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 2,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=6', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 3,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=8', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 4,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=9', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 1,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=7', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 2,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=6', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 3,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=8', altText: 'Stylish Top' }],
-        },
-        {
-          _id: 4,
-          name: 'Stylish Top',
-          price: 100,
-          images: [{ url: 'https://picsum.photos/500/500?random=9', altText: 'Stylish Top' }],
-        },
-      ];
-
-      setProducts(fetchedProducts);
-    }, 1000);
-  }, []);
-
   return (
     <div className="flex flex-col lg:flex-row">
       {/*Mobile filter button */}
-      <div className="grid grid-cols-2">
+      <div className="lg:hidden grid grid-cols-2 sticky top-15 z-10 shadow-md bg-white">
         <button
           ref={filterBtnRef}
           onClick={toggleFilterbar}
-          className="lg:hidden border p-2 flex justify-center items-center"
+          className="border p-2 flex justify-center items-center"
         >
           <FaFilter className="mr-2" />
           Filters
@@ -149,7 +80,7 @@ const CollectionPage = () => {
         <button
           ref={sortBtnRef}
           onClick={toggleSortbar}
-          className="lg:hidden border p-2 flex justify-center items-center"
+          className=" border p-2 flex justify-center items-center"
         >
           <FaFilter className="mr-2" />
           Sort
@@ -159,7 +90,7 @@ const CollectionPage = () => {
       {/*Filter sidebar */}
       <div
         ref={filterbarRef}
-        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 bg-white z-50 w-xs overflow-y-auto transition-transform duration-200 lg:static lg:translate-x-0`}
+        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 bg-white z-50 w-xs lg:z-0 overflow-y-auto transition-transform duration-200 lg:static lg:translate-x-0`}
       >
         <FilterSidebar />
       </div>
@@ -185,7 +116,7 @@ const CollectionPage = () => {
         <div className="hidden lg:block">
           <SortOptions />
         </div>
-        <ProductGrid products={products} />
+        <ProductGrid products={products} loading={loading} error={error} />
       </div>
     </div>
   );
