@@ -78,7 +78,7 @@ export const removeFromCart = createAsyncThunk(
     try {
       const response = await axios({
         method: 'DELETE',
-        url: `${import.meta.get.VITE_BACKEND_URL}/api/cart`,
+        url: `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         data: { productId, quantity, color, size, guestId, userId },
       });
 
@@ -134,7 +134,7 @@ const cartSlice = createSlice({
       })
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.loading = false;
-        state.cart = action.payload;
+        state.cart.products = action.payload;
         saveCartToStorage(action.payload);
       })
       .addCase(fetchCart.rejected, (state, action) => {

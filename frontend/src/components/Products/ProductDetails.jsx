@@ -126,10 +126,10 @@ const ProductDetails = ({ productId }) => {
             <div className="lg:w-1/2 lg:ml-10">
               <h1 className="text-2xl md:text-3xl font-semibold mb-2">{selectedProduct.name}</h1>
               <p className="text-md text-gray-600 mb-1 line-through">
-                {selectedProduct.originalPrice && `${selectedProduct.originalPrice}`}
+                {selectedProduct.price && `${selectedProduct.price}`}
               </p>
               <p className="text-gray-600 mb-4 text-lg">
-                {selectedProduct.price.toLocaleString('en-US', {
+                {selectedProduct.discountPrice.toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'USD',
                 })}

@@ -39,9 +39,7 @@ const addCartItem = async (req, res) => {
           quantity,
         });
       }
-      console.log('working');
       cart.totalPrice = cart.products.reduce((acc, item) => acc + item.price * item.quantity, 0);
-      console.log('Working 2');
       await cart.save();
       return res.status(200).json(cart);
     } else {

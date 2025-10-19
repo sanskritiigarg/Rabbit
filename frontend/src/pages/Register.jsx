@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegisterPic from '../assets/register.webp';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/slices/authSlice.js';
 
@@ -9,11 +9,14 @@ const Register = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerUser({ name, email, password }));
+    navigate('/');
   };
+
   return (
     <div className="flex">
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-10">
