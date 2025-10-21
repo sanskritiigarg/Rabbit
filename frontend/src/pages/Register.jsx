@@ -86,7 +86,10 @@ const Register = () => {
           </button>
           <p className="mt-6 text-center text-sm">
             Already have an account?&nbsp;
-            <Link to="/login" className="text-rabbit-red underline">
+            <Link
+              to={`/login?redirect=${encodeURIComponent(redirect)}`}
+              className="text-rabbit-red underline"
+            >
               Login
             </Link>
           </p>

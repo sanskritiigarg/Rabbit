@@ -145,7 +145,7 @@ const mergeCart = async (req, res) => {
   const { guestId } = req.body;
 
   try {
-    const userCart = await Cart.findOne(req.user._id);
+    const userCart = await Cart.findOne({ user: req.user._id });
     const guestCart = await Cart.findOne({ guestId });
 
     if (guestCart) {
@@ -175,13 +175,13 @@ const mergeCart = async (req, res) => {
           0,
         );
 
-        userCart.save();
+        await userCart.save();
         res.status(200).json(userCart);
       } else {
         // if no existing user cart, guest cart becomes user cart
         guestCart.user = req.user._id;
         guestCart.guestId = undefined;
-        guestCart.save();
+        await guestCart.save();
         res.status(200).json(guestCart);
       }
     } else {
@@ -192,7 +192,6 @@ const mergeCart = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-
     res.status(500).json({ message: 'Server Error' });
   }
 };

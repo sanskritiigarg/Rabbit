@@ -28,7 +28,7 @@ router.delete('/', deleteCartItem);
 // @router GET /api/cart
 // @desc Get user's cart
 // @access Public
-router.get('/', getUserCart);
+router.get('/', auth, getUserCart);
 
 // @route POST /api/cart/merge
 // @desc Merge guest cart into user cart on login
