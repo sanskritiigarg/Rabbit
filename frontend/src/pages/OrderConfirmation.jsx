@@ -1,37 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router';
-
-const checkout = {
-  _id: '123123',
-  createdAt: new Date(),
-  checkoutItems: [
-    {
-      productId: '1',
-      name: 'T-shirt',
-      size: 'M',
-      color: 'Red',
-      quantity: 1,
-      price: 15,
-      image: 'https://picsum.photos/600random=1',
-    },
-    {
-      productId: '2',
-      name: 'Jeans',
-      size: 'M',
-      color: 'Blue',
-      quantity: 1,
-      price: 25,
-      image: 'https://picsum.photos/200random=2',
-    },
-  ],
-  shippingAddress: {
-    address: '123 Fashion Street',
-    city: 'New York',
-    country: 'USA',
-  },
-};
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { clearCart } from '../../redux/slices/cartSlice';
 
 const OrderConfirmation = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { checkout } = useSelector((state) => state.checkout);
+
+  console.log(checkout);
+
+  useEffect(() => {
+    if (checkout && checkout._id) {
+      dispatch(clearCart());
+      localStorage.removeItem('cart');
+    } else {
+      navigate('/my-orders');
+    }
+  }, [checkout, dispatch, navigate]);
+
   const calculateEstimatedDelivery = (createdAt) => {
     const orderDate = new Date(createdAt);
     orderDate.setDate(orderDate.getDate() + 10);
@@ -95,7 +82,7 @@ const OrderConfirmation = () => {
               >
                 Payment
               </h4>
-              <p className="text-gray-600">Razorpay</p>
+              <p className="text-gray-600">{checkout.paymentMethod}</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-2">Delivery</h4>

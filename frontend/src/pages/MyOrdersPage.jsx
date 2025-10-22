@@ -1,62 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { fetchUserOrders } from '../../redux/slices/orderSlice';
 
 const MyOrdersPage = () => {
-  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { orders, loading, error } = useSelector((state) => state.orders);
 
   useEffect(() => {
-    setTimeout(() => {
-      const mockOrders = [
-        {
-          id: 12345,
-          createdAt: new Date(),
-          orderItems: [
-            {
-              name: 'Product 1',
-              image: 'https://picsum.photos/500/500?random=1',
-            },
-            {
-              name: 'Product 2',
-              image: 'https://picsum.photos/500/500?random=2',
-            },
-          ],
-          shippingAddress: {
-            city: 'Mumbai',
-            country: 'India',
-          },
-          totalPrice: 1000,
-          isPaid: true,
-        },
-        {
-          id: 12346,
-          createdAt: new Date(),
-          orderItems: [
-            {
-              name: 'Product 1',
-              image: 'https://picsum.photos/500/500?random=3',
-            },
-            {
-              name: 'Product 2',
-              image: 'https://picsum.photos/500/500?random=2',
-            },
-          ],
-          shippingAddress: {
-            city: 'Mumbai',
-            country: 'India',
-          },
-          totalPrice: 1000,
-          isPaid: true,
-        },
-      ];
-
-      setOrders(mockOrders);
-    }, 1000);
-  }, []);
+    dispatch(fetchUserOrders());
+  }, [dispatch]);
 
   const handleRowClick = (id) => {
     navigate(`/order/${id}`);
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6">
@@ -79,9 +45,9 @@ const MyOrdersPage = () => {
             {orders.length > 0 ? (
               orders.map((order) => (
                 <tr
-                  key={order.id}
+                  key={order._id}
                   className="border-b hover:border-gray-50 cursor-pointer"
-                  onClick={() => handleRowClick(order.id)}
+                  onClick={() => handleRowClick(order._id)}
                 >
                   <td className="py-2 px-4 sm:py-3 sm:px-4">
                     <img
