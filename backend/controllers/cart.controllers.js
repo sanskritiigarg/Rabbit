@@ -39,7 +39,9 @@ const addCartItem = async (req, res) => {
           quantity,
         });
       }
-      cart.totalPrice = cart.products.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      cart.totalPrice = cart.products
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2);
       await cart.save();
       return res.status(200).json(cart);
     } else {
@@ -58,7 +60,9 @@ const addCartItem = async (req, res) => {
             quantity,
           },
         ],
-        totalPrice: (product.discountPrice ? product.discountPrice : product.price) * quantity,
+        totalPrice: (
+          (product.discountPrice ? product.discountPrice : product.price) * quantity
+        ).toFixed(2),
       });
 
       res.status(201).json(newCart);
@@ -84,10 +88,12 @@ const updateCartItem = async (req, res) => {
       if (quantity > 0) {
         cart.products[productIndex].quantity = quantity;
       } else {
-        cart.products.splice(productIndex, 1); // remove item from cart
+        cart.products.splice(productIndex, 1);
       }
 
-      cart.totalPrice = cart.products.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      cart.totalPrice = cart.products
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2);
       await cart.save();
       return res.status(200).json(cart);
     } else {
@@ -113,7 +119,9 @@ const deleteCartItem = async (req, res) => {
 
     if (productIndex > -1) {
       cart.products.splice(productIndex, 1);
-      cart.totalPrice = cart.products.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      cart.totalPrice = cart.products
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2);
 
       cart.save();
       res.status(200).json(cart);
@@ -170,10 +178,9 @@ const mergeCart = async (req, res) => {
           }
         });
 
-        userCart.totalPrice = userCart.products.reduce(
-          (acc, item) => acc + item.price * item.quantity,
-          0,
-        );
+        userCart.totalPrice = userCart.products
+          .reduce((acc, item) => acc + item.price * item.quantity, 0)
+          .toFixed(2);
 
         await userCart.save();
         res.status(200).json(userCart);
