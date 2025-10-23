@@ -17,11 +17,17 @@ export const addUser = createAsyncThunk(
   'adminUser/addUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
+        userData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+          },
         },
-      });
+      );
+
+      return response.data;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.message);
@@ -33,7 +39,7 @@ export const addUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'adminUser/updateUser',
   async ({ id, email, name, role }) => {
-    const response = await axios.post(
+    const response = await axios.put(
       `${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
       { email, name, role },
       {
@@ -119,7 +125,7 @@ const adminUserSlice = createSlice({
       })
       .addCase(addUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.error.message;
       });
   },
 });
