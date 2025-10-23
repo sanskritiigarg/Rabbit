@@ -19,6 +19,7 @@ import ProductManagement from './components/Admin/ProductManagement';
 import EditProductPage from './components/Admin/EditProductPage';
 import OrderManagement from './components/Admin/OrderManagement';
 import ScrollToTop from './utils/ScrollToTop';
+import ProtectedRoute from './components/Common/ProtectedRoute';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -40,7 +41,15 @@ function App() {
           <Route path="/order/:id" element={<OrderDetailsPage />} />
           <Route path="/my-orders" element={<MyOrdersPage />} />
         </Route>
-        <Route path="/admin/" element={<AdminLayout />}>
+
+        <Route
+          path="/admin/"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<AdminHomePage />} />
           <Route path="users" element={<UserManagement />} />
           <Route path="products" element={<ProductManagement />} />

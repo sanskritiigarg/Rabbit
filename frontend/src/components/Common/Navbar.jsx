@@ -14,6 +14,7 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
   const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
 
   const cartQuantity = cart?.products?.reduce((acc, product) => acc + product.quantity, 0) || 0;
 
@@ -63,9 +64,11 @@ const Navbar = () => {
 
         {/*Icons */}
         <div className="flex items-center space-x-4">
-          <Link to={'/admin'} className="block bg-black text-white rounded-lg text-sm p-1">
-            Admin
-          </Link>
+          {user && user.role === 'admin' && (
+            <Link to={'/admin'} className="block bg-black text-white rounded-md text-sm py-1 px-2">
+              Admin
+            </Link>
+          )}
 
           <div className="overflow-hidden">
             <SearchBar />

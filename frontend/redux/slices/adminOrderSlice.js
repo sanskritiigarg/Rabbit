@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, addListener } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Fetch all orders
@@ -83,7 +83,7 @@ const adminOrderSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllOrders.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.orders = action.payload;
         state.totalOrders = action.payload.length;
 
@@ -93,7 +93,7 @@ const adminOrderSlice = createSlice({
         state.totalSales = totalSales;
       })
       .addCase(fetchAllOrders.rejected, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload.message;
       })
       // update order status
@@ -102,7 +102,7 @@ const adminOrderSlice = createSlice({
         state.error = null;
       })
       .addCase(updateOrderStatus.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         updatedOrder = action.payload;
         const index = state.orders.findIndex((order) => order._id === updatedOrder._id);
 
@@ -111,7 +111,7 @@ const adminOrderSlice = createSlice({
         }
       })
       .addCase(updateOrderStatus.rejected, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload.message;
       })
       // delete order
@@ -120,7 +120,7 @@ const adminOrderSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteOrder.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.orders = state.orders.filter((order) => order._id !== action.payload);
         state.totalOrders -= 1;
 
@@ -130,7 +130,7 @@ const adminOrderSlice = createSlice({
         state.totalSales = totalSales;
       })
       .addCase(deleteOrder.rejected, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload.message;
       });
   },
