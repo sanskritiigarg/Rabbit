@@ -1,6 +1,11 @@
 import express from 'express';
 import { auth, admin } from '../middlewares/auth.middlewares.js';
-import { getProducts } from '../controllers/adminProduct.controllers.js';
+import {
+  getProducts,
+  deleteProduct,
+  updateProduct,
+  createProduct,
+} from '../controllers/adminProduct.controllers.js';
 
 const router = express.Router();
 
@@ -9,12 +14,19 @@ const router = express.Router();
 // @access Private/Admin
 router.get('/', auth, admin, getProducts);
 
+// @route DELETE /api/admin/products/:id
+// @desc Delelte a product
+// @access Private/Admin
+router.delete('/:id', auth, admin, deleteProduct);
+
 // @route POST /api/admin/products/add
 // @desc Add new product
 // @access Private/Admin
+router.post('/', auth, admin, createProduct);
 
-// @route POST /api/admin/products/edit
+// @route PUT /api/admin/products/edit
 // @desc Edit existing product
 // @access Private/Admin
+router.put('/:id', auth, admin, updateProduct);
 
 export default router;

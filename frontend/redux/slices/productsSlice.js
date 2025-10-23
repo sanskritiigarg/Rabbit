@@ -47,24 +47,6 @@ export const fetchProductDetails = createAsyncThunk('products/fetchProductDetail
   return response.data;
 });
 
-// Async thunk to update product by id
-export const updateProduct = createAsyncThunk(
-  'products/updateProduct',
-  async ({ id, productData }) => {
-    const response = await axios.put(
-      `${import.meta.env.VITE_BACKEND_URL}/products/api/${id}`,
-      productData,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-        },
-      },
-    );
-
-    return response.data;
-  },
-);
-
 // Async thunk to fetch similar products
 export const fetchSimilarProducts = createAsyncThunk(
   'products/fetchSimilarProducts',
@@ -144,25 +126,6 @@ const productsSlice = createSlice({
         state.selectedProduct = action.payload;
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      })
-      //Handle updating product details
-      .addCase(updateProduct.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(updateProduct.fulfilled, (state, action) => {
-        state.loading = false;
-        const updatedProduct = action.payload;
-
-        const index = state.products.findIndex((product) => product._id === updateProduct._id);
-
-        if (index !== -1) {
-          state.products[index] = updatedProduct;
-        }
-      })
-      .addCase(updateProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })

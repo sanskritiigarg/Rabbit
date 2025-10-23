@@ -1,21 +1,29 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProduct, fetchAdminProducts } from '../../../redux/slices/adminProductSlice';
 
 const ProductManagement = () => {
-  const products = [
-    {
-      _id: 123123,
-      name: 'Shirt',
-      price: 110,
-      sku: '123123123',
-    },
-  ];
+  const { products, loading, error } = useSelector((state) => state.adminProducts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAdminProducts());
+  }, [dispatch]);
 
   const handleDelete = (productId) => {
     if (window.confirm('Are you sure you want to delete the Product?')) {
-      console.log('Delete Product with id:', productId);
+      dispatch(deleteProduct(productId));
     }
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -34,7 +42,7 @@ const ProductManagement = () => {
             {products.length > 0 ? (
               products.map((product) => (
                 <tr key={product._id} className="border-b hover:bg-gray-50 cursor-pointer">
-                  <td className="p-4 font-medium text-gray-900 whitespace-nowrap">
+                  <td className="p-4 font-medium text-gray-900 whitespace-pre-wrap">
                     {product.name}
                   </td>
                   <td className="p-4 text-gray-600">{product.price}</td>

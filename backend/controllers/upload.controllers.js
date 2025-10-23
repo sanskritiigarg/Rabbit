@@ -35,11 +35,31 @@ const uploadFile = async (req, res) => {
     // Call the streamUpload function
     const result = await streamUpload(req.file.buffer);
 
-    res.json({ imageUrl: result.secure_url });
+    res.json({ imageUrl: result.secure_url, publicId: result.public_id });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Server Error' });
   }
 };
 
-export { uploadFile };
+const deleteFile = async (req, res) => {
+  try {
+    const { publicId } = req.body;
+
+    if (!publicId)
+      return res.json(404).json({ message: 'PublicId of to be deleted image not Provided' });
+
+    const result = cloudinary.uploader.destroy(publicId);
+
+    if (result.result === 'ok') {
+      res.json({ message: 'Image delete Successfully' });
+    } else {
+      res.json({ message: 'Deletion failed' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+export { uploadFile, deleteFile };
