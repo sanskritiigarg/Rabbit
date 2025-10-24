@@ -17,6 +17,9 @@ const registerUser = async (req, res) => {
 
     if (user) return res.status(400).json({ message: 'User already exists' });
 
+    if (password.length < 6)
+      return res.status(400).json({ message: 'Password should be atleast of 6 characters' });
+
     user = new User({ name, email, password });
     await user.save();
 

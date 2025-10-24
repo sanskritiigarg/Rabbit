@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   HiOutlineUser,
+  HiUser,
   HiOutlineShoppingBag,
   HiBars3BottomRight,
   HiMiniXMark,
@@ -30,8 +31,8 @@ const Navbar = () => {
       <nav className="container mx-auto flex items-center justify-between py-4 px-6">
         {/*Logo*/}
         <div>
-          <Link to="/" className="text-2xl font-medium">
-            Rabbit
+          <Link to="/" className="text-2xl font-semibold">
+            Stitches
           </Link>
         </div>
         {/*Categories Navigation Link */}
@@ -77,14 +78,18 @@ const Navbar = () => {
           <button onClick={toggleCartDrawer} className="relative hover:text-black">
             <HiOutlineShoppingBag className="h-6 w-6 text-gray-700" />
             {cartQuantity > 0 && (
-              <span className="bg-rabbit-red py-0.5 px-2 rounded-full text-white text-xs absolute -top-1">
+              <span className="bg-stitches py-0.5 px-2 rounded-full text-white text-xs absolute -top-1">
                 {cartQuantity}
               </span>
             )}
           </button>
 
           <Link to="/profile">
-            <HiOutlineUser className="h-6 w-6 text-gray-700 hover:text-black" />
+            {user ? (
+              <HiUser className="h-6 w-6 text-gray-700 hover:text-black" />
+            ) : (
+              <HiOutlineUser className="h-6 w-6 text-gray-700 hover:text-black" />
+            )}
           </Link>
 
           <button className="md:hidden" onClick={toggleNavDrawer}>
@@ -105,34 +110,34 @@ const Navbar = () => {
         </div>
         <div className="p-4">
           <h2 className="text-xl font-semibold mb-4">Menu</h2>
-          <nav className="space-y-2 text-lg">
+          <nav className="space-y-2 text-md">
             <Link
               to="collection/all?gender=Men"
               className="block text-gray-600 hover:text-black"
               onClick={toggleNavDrawer}
             >
-              Men
+              MEN
             </Link>
             <Link
               to="collection/all?gender=Women"
               className="block text-gray-600 hover:text-black"
               onClick={toggleNavDrawer}
             >
-              Women
-            </Link>
-            <Link
-              to="collection/all?category=Bottom+Wear"
-              className="block text-gray-600 hover:text-black"
-              onClick={toggleNavDrawer}
-            >
-              Bottom Wear
+              WOMEN
             </Link>
             <Link
               to="collection/all?category=Top+Wear"
               className="block text-gray-600 hover:text-black"
               onClick={toggleNavDrawer}
             >
-              Top Wear
+              TOP WEAR
+            </Link>
+            <Link
+              to="collection/all?category=Bottom+Wear"
+              className="block text-gray-600 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              BOTTOM WEAR
             </Link>
           </nav>
         </div>

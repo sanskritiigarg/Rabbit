@@ -90,7 +90,7 @@ const CollectionPage = () => {
       {/*Filter sidebar */}
       <div
         ref={filterbarRef}
-        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 bg-white z-50 w-xs lg:z-0 overflow-y-auto transition-transform duration-200 lg:static lg:translate-x-0`}
+        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} sticky top-15 inset-y-0 bg-white z-50 w-xs  overflow-y-auto transition-transform duration-200 lg:translate-x-0 h-screen`}
       >
         <FilterSidebar />
       </div>
@@ -111,7 +111,7 @@ const CollectionPage = () => {
         <div className="fixed inset-0 z-10 bg-black/50 md:hidden" onClick={toggleSortbar}></div>
       )}
 
-      <div className="flex-grow p-4">
+      <div className="grow p-4">
         <h2 className="text-2xl uppercase mb-4 px-4">All Collection</h2>
         <div className="hidden lg:block">
           <SortOptions />

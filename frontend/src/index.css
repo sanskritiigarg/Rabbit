@@ -1,13 +1,13 @@
 @import 'tailwindcss';
 
 #root {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
 
 @theme {
-  --color-rabbit-red: #ea2e0e;
+  --color-stitches: #cc5500;
 }
 
 button {

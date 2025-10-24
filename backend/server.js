@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 connectdb();
 
 app.get('/', (req, res) => {
-  res.send('WELCOME TO RABBIT API!');
+  res.send('WELCOME TO STITCHES API!');
 });
 
 //API ROUTES

@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 const Header = () => {
   return (
-    <header className="border-b border-gray-200 sticky -top-8 bg-white z-10">
+    <header className="border-b border-gray-200 sticky -top-8 bg-white z-10 shadow">
       {/* Topbar
         Navbar 
         Cart Drawer */}

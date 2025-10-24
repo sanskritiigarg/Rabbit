@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import featuredCollection from '../../assets/featured.webp';
+import featuredCollection from '../../assets/featured-collection.jpg';
 
 const FeaturedCollection = () => {
   return (
@@ -15,7 +15,7 @@ const FeaturedCollection = () => {
             Designed to make you look great everyday.
           </p>
           <Link
-            to="collections/all"
+            to="collection/all"
             className="bg-black text-white px-4 py-2 rounded-lg text-lg hover:bg-gray-800"
           >
             Shop Now
@@ -27,7 +27,7 @@ const FeaturedCollection = () => {
           <img
             src={featuredCollection}
             alt="Featured Collection"
-            className="w-full h-full object-cover rounded-tr-3xl rounded-br-3xl"
+            className="w-full h-[550px] object-cover rounded-tr-3xl rounded-br-3xl"
           />
         </div>
       </div>

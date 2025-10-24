@@ -91,7 +91,7 @@ const FilterSidebar = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 mb-6">
       <h3 className="text-xl font-medium text-gray-800 mb-4">Filters</h3>
 
       {/*Category filters*/}
@@ -101,7 +101,7 @@ const FilterSidebar = () => {
           <div key={category} className="flex items-center mb-0.5">
             <input
               type="radio"
-              className="mr-2 h-4 w-4 accent-rabbit-red border-gray-300"
+              className="mr-2 h-4 w-4 accent-stitches border-gray-300"
               checked={filters.category == category}
               name="category"
               onChange={handleFilterChange}
@@ -119,7 +119,7 @@ const FilterSidebar = () => {
           <div key={gender} className="flex items-center mb-0.5">
             <input
               type="radio"
-              className="mr-2 h-4 w-4 accent-rabbit-red border-gray-300"
+              className="mr-2 h-4 w-4 accent-stitches border-gray-300"
               name="gender"
               value={gender}
               checked={filters.gender == gender}
@@ -155,7 +155,7 @@ const FilterSidebar = () => {
             <input
               type="checkbox"
               name="size"
-              className="mr-2 h-4 w-4 accent-rabbit-red border-gray-300"
+              className="mr-2 h-4 w-4 accent-stitches border-gray-300"
               value={size}
               checked={filters.size.includes(size)}
               onChange={handleFilterChange}
@@ -173,7 +173,7 @@ const FilterSidebar = () => {
             <input
               type="checkbox"
               name="material"
-              className="mr-2 h-4 w-4 accent-rabbit-red border-gray-300"
+              className="mr-2 h-4 w-4 accent-stitches border-gray-300"
               checked={filters.material.includes(material)}
               value={material}
               onChange={handleFilterChange}
@@ -191,7 +191,7 @@ const FilterSidebar = () => {
             <input
               type="checkbox"
               name="brand"
-              className="mr-2 h-4 w-4 accent-rabbit-red border-gray-300"
+              className="mr-2 h-4 w-4 accent-stitches border-gray-300"
               checked={filters.brand.includes(brand)}
               value={brand}
               onChange={handleFilterChange}
@@ -209,7 +209,7 @@ const FilterSidebar = () => {
           name="priceRange"
           min={0}
           max={100}
-          className="w-full h-2 bg-gray-300 rounded-lg cursor-pointer accent-rabbit-red"
+          className="w-full h-2 bg-gray-300 rounded-lg cursor-pointer accent-stitches"
           value={priceRange[1]}
           onChange={handlePriceChange}
         />

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import RegisterPic from '../assets/register.webp';
+import { useState, useEffect } from 'react';
+import RegisterPic from '../assets/register.jpg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../redux/slices/authSlice.js';
+import { registerUser, clearError } from '../../redux/slices/authSlice.js';
 import { mergeCart } from '../../redux/slices/cartSlice.js';
 
 const Register = () => {
@@ -12,7 +12,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, guestId } = useSelector((state) => state.auth);
+  const { user, guestId, loading, error } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
 
   // Get redirect parameter and check if its checkout or otherwise
@@ -31,6 +31,12 @@ const Register = () => {
     }
   }, [dispatch, navigate, cart, user, guestId, isCheckoutRedirect]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  }, [dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerUser({ name, email, password }));
@@ -44,17 +50,23 @@ const Register = () => {
           className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm"
         >
           <div className="flex justify-center mb-4">
-            <h2 className="text-xl font-medium">Rabbit</h2>
+            <h2 className="text-xl font-semibold">Stitches</h2>
           </div>
           <h2 className="text-2xl font-bold mb-2 text-center">Hey there!</h2>
-          <p className="text-center mb-4">Enter your details to register</p>
-          <div className="mb-4">
+          <p className="text-center">Enter your details to register</p>
+          {error && (
+            <p className="text-red-500 text-center text-sm tracking-tight">
+              {error || 'An unexpected error occured. Please try again later.'}
+            </p>
+          )}
+          <div className="mt-4 mb-4">
             <label className="block text-sm font-semibold mb-2">Name</label>
             <input
               type="text"
               className="w-full rounded border p-1.5"
               placeholder="Enter your name"
               value={name}
+              required
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -63,6 +75,7 @@ const Register = () => {
             <input
               type="email"
               className="w-full rounded border p-1.5"
+              required
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -73,6 +86,7 @@ const Register = () => {
             <input
               type="password"
               className="w-full rounded border p-1.5"
+              required
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -82,13 +96,13 @@ const Register = () => {
             type="submit"
             className="w-full bg-black text-white p-2 rounded font-semibold hover:bg-gray-800 transition"
           >
-            Sign In
+            {loading ? 'Loading...' : 'Sign Up'}
           </button>
           <p className="mt-6 text-center text-sm">
             Already have an account?&nbsp;
             <Link
               to={`/login?redirect=${encodeURIComponent(redirect)}`}
-              className="text-rabbit-red underline"
+              className="text-red-600 underline"
             >
               Login
             </Link>

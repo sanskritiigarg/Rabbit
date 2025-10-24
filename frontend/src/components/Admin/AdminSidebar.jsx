@@ -12,10 +12,10 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 z-50">
       <div className="mb-6">
-        <Link to="/admin" className="text-2xl font-medium">
-          Rabbit
+        <Link to="/admin" className="text-2xl font-semibold">
+          Stitches
         </Link>
       </div>
 
@@ -71,7 +71,7 @@ const AdminSidebar = () => {
 
       <div className="mt-6">
         <button
-          className="w-full bg-red-500 hover:bg-red-600 text-white py-3 px-4 rounded flex items-center justify-center space-x-2"
+          className="w-full bg-stitches hover:bg-stitches/90 text-white py-3 px-4 rounded flex items-center justify-center space-x-2"
           onClick={handleLogout}
         >
           <FaSignOutAlt />
