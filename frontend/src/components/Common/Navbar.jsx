@@ -101,7 +101,7 @@ const Navbar = () => {
 
       {/*Mobile Navigation */}
       <div
-        className={`fixed top-0 left-0 w-1/2 z-50 md:w-1/3 h-full transform transition-transform duration-300z-50 bg-white shadow-lg ${navDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed top-0 left-0 w-1/2 md:w-1/3 h-full transform transition-transform duration-300 bg-white shadow-lg ${navDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex justify-end p-4">
           <button onClick={toggleNavDrawer}>

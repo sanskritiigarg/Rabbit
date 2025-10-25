@@ -125,8 +125,14 @@ const ProductDetails = ({ productId }) => {
             {/*Product details on right */}
             <div className="lg:w-1/2 lg:ml-10">
               <h1 className="text-2xl md:text-3xl font-semibold mb-2">{selectedProduct.name}</h1>
-              <p className="text-md text-gray-600 mb-1 line-through">
-                {selectedProduct.price && `${selectedProduct.price}`}
+              <p
+                className={`text-md text-gray-600 mb-1 ${selectedProduct.discountPrice ? 'line-through' : 'mb-4 text-lg'}`}
+              >
+                {selectedProduct.price &&
+                  `${selectedProduct.price.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                  })}`}
               </p>
               <p className="text-gray-600 mb-4 text-lg">
                 {selectedProduct.discountPrice?.toLocaleString('en-US', {

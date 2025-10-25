@@ -67,7 +67,7 @@ const CollectionPage = () => {
   return (
     <div className="flex flex-col lg:flex-row">
       {/*Mobile filter button */}
-      <div className="lg:hidden grid grid-cols-2 sticky top-15 z-10 shadow-md bg-white">
+      <div className="lg:hidden grid grid-cols-2 sticky top-15 z-5 shadow-md bg-white">
         <button
           ref={filterBtnRef}
           onClick={toggleFilterbar}
@@ -90,7 +90,7 @@ const CollectionPage = () => {
       {/*Filter sidebar */}
       <div
         ref={filterbarRef}
-        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} sticky top-15 inset-y-0 bg-white z-50 w-xs  overflow-y-auto transition-transform duration-200 lg:translate-x-0 h-screen`}
+        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} fixed top-0 lg:sticky lg:top-20 lg:w-[400px] inset-y-0 bg-white z-50 w-xs overflow-y-auto transition-transform duration-200 lg:translate-x-0 h-screen`}
       >
         <FilterSidebar />
       </div>
@@ -104,11 +104,11 @@ const CollectionPage = () => {
       </div>
 
       {isFilterbarOpen && (
-        <div className="fixed inset-0 z-10 bg-black/50 md:hidden" onClick={toggleFilterbar}></div>
+        <div className="fixed inset-0 z-10 bg-black/50 lg:hidden" onClick={toggleFilterbar}></div>
       )}
 
       {isSortbarOpen && (
-        <div className="fixed inset-0 z-10 bg-black/50 md:hidden" onClick={toggleSortbar}></div>
+        <div className="fixed inset-0 z-10 bg-black/50 lg:hidden" onClick={toggleSortbar}></div>
       )}
 
       <div className="grow p-4">
