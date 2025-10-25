@@ -18,7 +18,7 @@ export const createProduct = createAsyncThunk(
   async (productData) => {
     const response = await axios.post(
       `${import.meta.env.VITE_BACKEND_URL}/api/admin/products`,
-      productData,
+      { ...productData },
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('userToken')}`,

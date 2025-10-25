@@ -20,6 +20,7 @@ import EditProductPage from './components/Admin/EditProductPage';
 import OrderManagement from './components/Admin/OrderManagement';
 import ScrollToTop from './utils/ScrollToTop';
 import ProtectedRoute from './components/Common/ProtectedRoute';
+import AddProductPage from './components/Admin/AddProductPage';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -54,6 +55,7 @@ function App() {
           <Route path="users" element={<UserManagement />} />
           <Route path="products" element={<ProductManagement />} />
           <Route path="products/:id/edit" element={<EditProductPage />} />
+          <Route path="products/add" element={<AddProductPage />} />
           <Route path="orders" element={<OrderManagement />} />
         </Route>
       </Routes>

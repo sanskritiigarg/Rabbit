@@ -57,7 +57,7 @@ const MyOrdersPage = () => {
                     />
                   </td>
                   <td className="py-2 px-4 sm:py-3 sm:px-4 font-medium text-gray-900 whitespace-nowrap">
-                    #{order.id}
+                    #{order._id}
                   </td>
                   <td className="py-2 px-4 sm:py-3 sm:px-4">
                     {new Date(order.createdAt).toLocaleDateString()}{' '}

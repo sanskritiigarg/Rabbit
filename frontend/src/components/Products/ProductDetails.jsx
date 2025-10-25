@@ -129,7 +129,7 @@ const ProductDetails = ({ productId }) => {
                 {selectedProduct.price && `${selectedProduct.price}`}
               </p>
               <p className="text-gray-600 mb-4 text-lg">
-                {selectedProduct.discountPrice.toLocaleString('en-US', {
+                {selectedProduct.discountPrice?.toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'USD',
                 })}

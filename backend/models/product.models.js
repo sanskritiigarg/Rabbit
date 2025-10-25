@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema(
     discountPrice: {
       type: Number,
     },
-    countIntStock: {
+    countInStock: {
       type: Number,
       required: true,
       default: 0,
@@ -65,10 +65,6 @@ const productSchema = new mongoose.Schema(
         },
       },
     ],
-    isFeatured: {
-      type: Boolean,
-      default: false,
-    },
     isPublic: {
       type: Boolean,
       default: false,

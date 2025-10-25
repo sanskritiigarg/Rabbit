@@ -42,7 +42,6 @@ const updateProduct = async (req, res) => {
       material,
       gender,
       images,
-      isFeatured,
       isPublished,
       tags,
       dimensions,
@@ -66,7 +65,6 @@ const updateProduct = async (req, res) => {
       product.material = material || product.material;
       product.gender = gender || product.gender;
       product.images = images || product.images;
-      product.isFeatured = isFeatured !== undefined ? isFeatured : product.isFeatured;
       product.isPublished = isPublished !== undefined ? isPublished : product.isPublished;
       product.tags = tags || product.tags;
       product.dimensions = dimensions || product.dimensions;
@@ -101,7 +99,6 @@ const createProduct = async (req, res) => {
       material,
       gender,
       images,
-      isFeatured,
       isPublished,
       tags,
       dimensions,
@@ -123,7 +120,6 @@ const createProduct = async (req, res) => {
       material,
       gender,
       images,
-      isFeatured,
       isPublished,
       tags,
       dimensions,
