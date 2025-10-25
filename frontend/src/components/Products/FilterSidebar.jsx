@@ -33,7 +33,6 @@ const FilterSidebar = () => {
 
   useEffect(() => {
     const params = Object.fromEntries([...searchParams]);
-    console.log(params);
 
     setFilters({
       category: params.category || '',
@@ -68,7 +67,7 @@ const FilterSidebar = () => {
   };
 
   const updateURLParams = (newFilters) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams);
 
     Object.keys(newFilters).forEach((key) => {
       if (Array.isArray(newFilters[key]) && newFilters[key].length > 0) {

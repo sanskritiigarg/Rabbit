@@ -41,7 +41,7 @@ const getProductsByCategory = async (req, res) => {
     }
 
     if (color) {
-      query.colors = color;
+      query.colors = { $in: color.split(',') };
     }
 
     if (gender) {
@@ -51,23 +51,20 @@ const getProductsByCategory = async (req, res) => {
     const conditions = [];
 
     if (minPrice || maxPrice) {
-      const min = Number(minPrice);
-      const max = Number(maxPrice);
+      const priceCondition = {};
+      if (minPrice) priceCondition.$gte = Number(minPrice);
+      if (maxPrice) priceCondition.$lte = Number(maxPrice);
+
       conditions.push({
-        $or: [
-          { price: { $gte: min || 0, $lte: max || 100 } },
-          { discountPrice: { $gte: min || 0, $lte: max || 100 } },
-        ],
+        $or: [{ price: priceCondition }, { discountPrice: priceCondition }],
       });
     }
 
     if (search) {
       conditions.push({
         $or: [
-          {
-            name: { $regex: search, $options: 'i' },
-            description: { $regex: search, $options: 'i' },
-          },
+          { name: { $regex: search, $options: 'i' } },
+          { description: { $regex: search, $options: 'i' } },
         ],
       });
     }

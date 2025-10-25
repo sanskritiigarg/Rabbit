@@ -61,7 +61,7 @@ const updateProduct = async (req, res) => {
       product.brand = brand || product.brand;
       product.sizes = sizes || product.sizes;
       product.colors = colors || product.colors;
-      product.collections = collections || product.collections;
+      product.collections = collections.toLowerCase() || product.collections;
       product.material = material || product.material;
       product.gender = gender || product.gender;
       product.images = images || product.images;
@@ -116,7 +116,7 @@ const createProduct = async (req, res) => {
       brand,
       sizes,
       colors,
-      collections,
+      collections: collections.toLowerCase(),
       material,
       gender,
       images,
