@@ -5,7 +5,11 @@ import {
   getSimilarProducts,
   getBestSeller,
   getNewArrivals,
+  addUserReview,
+  updateUserReview,
+  deleteUserReview,
 } from '../controllers/product.controllers.js';
+import { auth } from '../middlewares/auth.middlewares.js';
 
 const router = express.Router();
 
@@ -33,5 +37,20 @@ router.get('/:id', getProductByID);
 // @desc Get similar products to current product
 // @access Public
 router.get('/similar/:id', getSimilarProducts);
+
+// @ route POST /api/products/:id/review
+// @desc Post a review for a product by a logged-in user
+// @access Private
+router.post('/:id/review', auth, addUserReview);
+
+// @ route PUT /api/products/:id/review/:reviewId
+// @desc Update existing review for a product by a logged-in user
+// @access Private
+router.put('/:id/review/:reviewId', auth, updateUserReview);
+
+// @ route DELETE /api/products/:id/review/:reviewId
+// @desc Delete a users review
+// @access Private
+router.delete('/:id/review/:reviewId', auth, deleteUserReview);
 
 export default router;
