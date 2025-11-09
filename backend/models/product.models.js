@@ -101,7 +101,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    reviews: [reviewSchema],
+    reviews: {
+      type: [reviewSchema],
+      default: [],
+    },
     tags: [String],
     user: {
       type: mongoose.Schema.ObjectId,
