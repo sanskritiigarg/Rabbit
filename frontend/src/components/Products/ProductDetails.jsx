@@ -141,15 +141,6 @@ const ProductDetails = ({ productId }) => {
     }
   };
 
-  const handleReviewEdit = async () => {
-    try {
-      toast.success('Review Edited Successfully', { duration: 1000 });
-    } catch (error) {
-      console.log(error);
-      toast.error('Review cannot be edited. Please try later', { duration: 1000 });
-    }
-  };
-
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -351,20 +342,12 @@ const ProductDetails = ({ productId }) => {
                       </div>
                       <p className="text-gray-600 text-sm">{review.comment}</p>
                       {review.user == user?._id && (
-                        <div className="text-gray-700 text-sm mt-2">
-                          <button
-                            className="hover:text-black mr-2"
-                            onClick={() => handleReviewDeletion(review._id)}
-                          >
-                            Delete
-                          </button>
-                          <button
-                            className="hover:text-black"
-                            onClick={() => handleReviewEdit(review)}
-                          >
-                            Edit
-                          </button>
-                        </div>
+                        <button
+                          className="text-blue-900/80 text-sm mt-2 mr-2 underline hover:text-blue-900"
+                          onClick={() => handleReviewDeletion(review._id)}
+                        >
+                          Delete Review
+                        </button>
                       )}
                     </div>
                   ))}

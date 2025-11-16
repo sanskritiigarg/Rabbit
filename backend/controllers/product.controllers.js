@@ -198,42 +198,6 @@ const addUserReview = async (req, res) => {
   }
 };
 
-const updateUserReview = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    const reviewId = req.params.reviewId;
-    const { rating, comment } = req.body;
-
-    if (!product) return res.status(404).json({ message: 'Product Not Found' });
-
-    const index = product.reviews.findIndex((review) => review._id.toString() === reviewId);
-
-    if (index === -1) return res.status(404).json({ message: 'Review Not Found' });
-
-    if (product.reviews[index].user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to edit this review' });
-    }
-
-    if (comment) {
-      product.reviews[index].comment = comment;
-    }
-
-    if (rating) {
-      const currProdRating = product.reviews[index].rating;
-      product.reviews[index].rating = rating;
-      product.rating =
-        (product.rating * product.numRatings - currProdRating + rating) / product.numRatings;
-    }
-
-    await product.save();
-
-    res.status(200).json(product);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: 'Server Error' });
-  }
-};
-
 const deleteUserReview = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -270,6 +234,5 @@ export {
   getBestSeller,
   getNewArrivals,
   addUserReview,
-  updateUserReview,
   deleteUserReview,
 };
