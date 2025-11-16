@@ -26,7 +26,7 @@ const Login = () => {
           navigate(isCheckoutRedirect ? '/checkout' : '/');
         });
       } else {
-        navigate(isCheckoutRedirect ? '/checkout' : '/');
+        navigate(redirect);
       }
     }
   }, [dispatch, navigate, cart, user, guestId, isCheckoutRedirect]);
