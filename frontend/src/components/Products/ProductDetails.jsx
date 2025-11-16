@@ -41,9 +41,9 @@ const ProductDetails = ({ productId }) => {
   useEffect(() => {
     const reviews = selectedProduct?.reviews;
     if (reviews) {
-      setProductReviews(reviews.slice(0, 5));
+      setProductReviews(reviews);
     }
-  }, [selectedProduct, selectedProduct?.reviews]);
+  }, [selectedProduct?.reviews]);
 
   useEffect(() => {
     if (selectedProduct?.images?.length > 0) {
@@ -100,11 +100,54 @@ const ProductDetails = ({ productId }) => {
             },
           },
         );
+
+        toast.success('Review added successfully!', { duration: 1000 });
+
+        setReview({ rating: 1, comment: '' });
+        setProductReviews((prev) => [response.data.review, ...prev]);
       } catch (error) {
         console.log(error);
+
+        if (error.status == 400) {
+          toast.error(error.response.data.message, { duration: 2000 });
+        } else {
+          toast.error('Review cannot be added. Please try later.', { duration: 2000 });
+        }
       }
     }
     setWriteReview(!writeReview);
+  };
+
+  const handleReviewDeletion = async (reviewId) => {
+    try {
+      if (window.confirm('Do you want to delete this review?')) {
+        await axios({
+          method: 'DELETE',
+          url: `${import.meta.env.VITE_BACKEND_URL}/api/products/${productFetchId}/review/${reviewId}`,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+          },
+        });
+
+        toast.success('Review Deleted Successfully', { duration: 1000 });
+        const updateReviews = productReviews.filter(
+          (productReview) => productReview._id !== reviewId,
+        );
+        setProductReviews(updateReviews);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Review cannot be deleted. Please try later', { duration: 1000 });
+    }
+  };
+
+  const handleReviewEdit = async () => {
+    try {
+      toast.success('Review Edited Successfully', { duration: 1000 });
+    } catch (error) {
+      console.log(error);
+      toast.error('Review cannot be edited. Please try later', { duration: 1000 });
+    }
   };
 
   if (loading) {
@@ -169,7 +212,7 @@ const ProductDetails = ({ productId }) => {
               {selectedProduct.rating && (
                 <div className="flex border w-32 p-1 mb-2 rounded items-center">
                   <FaStar className="h-4 w-4 p-0.5"></FaStar>
-                  <p className="pr-2 mr-2 border-r">{selectedProduct.rating}</p>
+                  <p className="pr-2 mr-2 border-r">{selectedProduct.rating.toFixed(1)}</p>
                   <p>{selectedProduct.numRatings} ratings</p>
                 </div>
               )}
@@ -271,7 +314,7 @@ const ProductDetails = ({ productId }) => {
                     }
                   })}
 
-                  <p className="ml-2">{selectedProduct.rating}</p>
+                  <p className="ml-2">{selectedProduct.rating.toFixed(1)}</p>
                   <p>/5</p>
                   <p className="ml-5 text-base">{selectedProduct.numRatings} ratings</p>
                 </div>
@@ -280,11 +323,49 @@ const ProductDetails = ({ productId }) => {
               <hr className="mb-4 border-gray-400"></hr>
 
               {productReviews.length > 0 ? (
-                <div className="space-y-4">
-                  {productReviews.map((review, i) => (
-                    <div key={i} className="p-4 bg-gray-50 rounded-lg">
-                      <p className="font-medium">{review.name}</p>
+                <div className="space-y-2 overflow-auto h-48">
+                  {productReviews.map((review) => (
+                    <div key={review._id} className="p-2 bg-gray-50 rounded-lg">
+                      <div className="flex items-baseline mb-1">
+                        <div className="flex grow">
+                          <p className="font-medium">{review?.name}</p>
+
+                          <div className="flex text-lg items-center px-4 text-stitches/90">
+                            {[...Array(5)].map((_, index) => {
+                              const rating = review.rating;
+                              const star = index + 1;
+
+                              if (rating >= star) {
+                                return <FaStar key={index}></FaStar>;
+                              } else if (rating >= star - 0.5) {
+                                return <FaStarHalfAlt key={index}></FaStarHalfAlt>;
+                              } else {
+                                return <CiStar key={index}></CiStar>;
+                              }
+                            })}
+                          </div>
+                        </div>
+                        <p className="text-gray-700 text-sm">
+                          {new Date(review.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
                       <p className="text-gray-600 text-sm">{review.comment}</p>
+                      {review.user == user?._id && (
+                        <div className="text-gray-700 text-sm mt-2">
+                          <button
+                            className="hover:text-black mr-2"
+                            onClick={() => handleReviewDeletion(review._id)}
+                          >
+                            Delete
+                          </button>
+                          <button
+                            className="hover:text-black"
+                            onClick={() => handleReviewEdit(review)}
+                          >
+                            Edit
+                          </button>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -320,7 +401,8 @@ const ProductDetails = ({ productId }) => {
                     })}
                   </div>
                   <textarea
-                    className="border w-full"
+                    placeholder="Write any comments (Optional)"
+                    className="border w-full p-2"
                     value={review.comment}
                     onChange={(e) => setReview({ ...review, comment: e.target.value })}
                   ></textarea>

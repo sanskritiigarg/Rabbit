@@ -171,6 +171,14 @@ const addUserReview = async (req, res) => {
 
     if (!product) return res.status(404).json({ message: 'Product Not Found' });
 
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString(),
+    );
+
+    if (alreadyReviewed) {
+      return res.status(400).json({ message: 'You already reviewed this product!' });
+    }
+
     const { rating, comment } = req.body;
     product.reviews.push({ rating, comment, user: req.user._id, name: req.user.name });
 
@@ -181,7 +189,9 @@ const addUserReview = async (req, res) => {
     product.numRatings += 1;
     await product.save();
 
-    res.status(200).json(product);
+    const newReview = product.reviews[product.reviews.length - 1];
+
+    res.status(200).json({ review: newReview });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: 'Server Error' });

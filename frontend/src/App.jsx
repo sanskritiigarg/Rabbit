@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UserLayout from './components/Layout/UserLayout';
 import Home from './pages/Home';
@@ -23,8 +22,6 @@ import ProtectedRoute from './components/Common/ProtectedRoute';
 import AddProductPage from './components/Admin/AddProductPage';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
       <ScrollToTop />
