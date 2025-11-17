@@ -90,7 +90,7 @@ const CollectionPage = () => {
       {/*Filter sidebar */}
       <div
         ref={filterbarRef}
-        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} fixed top-0 lg:sticky lg:top-20 lg:w-[400px] inset-y-0 bg-white z-50 w-xs overflow-y-auto transition-transform duration-200 lg:translate-x-0 h-screen`}
+        className={`${isFilterbarOpen ? 'translate-x-0' : '-translate-x-full'} fixed top-0 lg:sticky lg:top-20 lg:w-[300px] inset-y-0 bg-white z-50 w-3xs overflow-y-auto transition-transform duration-200 lg:translate-x-0 h-screen`}
       >
         <FilterSidebar />
       </div>
