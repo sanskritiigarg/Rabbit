@@ -4,7 +4,9 @@
 
 Stitches is a fully responsive e-commerce web application built using the MERN stack. It allows users to browse, search, and purchase men’s and women’s clothing with advanced filtering, sorting, and secure checkout options. The platform includes guest and authenticated user modes, an admin dashboard for managing products and orders, and an intuitive UI optimized for all screen sizes.
 
----
+**Live link:** https://stitches-store.vercel.app/  
+The backend is hosted on Render’s free tier, so the server may take 30–60 seconds to wake up.
+If the site doesn’t load immediately, wait a moment and refresh.
 
 ## Tech Stack
 
@@ -13,8 +15,6 @@ Stitches is a fully responsive e-commerce web application built using the MERN s
 - **Database:** MongoDB
 - **Cloud Storage:** Cloudinary
 - **Payment Integration:** PayPal (client-side integration via `@paypal/react-paypal-js`)
-
----
 
 ## Tech Highlights
 
@@ -25,8 +25,6 @@ Stitches is a fully responsive e-commerce web application built using the MERN s
 - **Secure checkout** with PayPal integration
 - Modular **routes–controllers** architecture for clean and maintainable backend logic
 - Separate **frontend and backend** with concurrent development setup
-
----
 
 ## Key Features
 
@@ -45,8 +43,6 @@ Stitches is a fully responsive e-commerce web application built using the MERN s
 - Manage users (view, edit, delete)
 - Approve or cancel orders
 - Access all order and product details through a dashboard
-
----
 
 ## Installation & Setup
 
@@ -131,6 +127,34 @@ Stitches is a fully responsive e-commerce web application built using the MERN s
 ├── package-lock.json
 └── package.json
 ```
+
+## Project Screenshots
+
+Landing page (Hero Image)
+![Landing Page](screenshots/landing-page.png)
+
+Collections page (Large and small screen)
+![Collections Page](screenshots/collections-page.png)
+
+<img src="screenshots/mobile-collection.jpg" alt="Mobile Collections Page" height="500" />
+
+Product Details page
+![Product Details Page](screenshots/product-details.png)
+
+Cart
+![Cart](screenshots/cart.png)
+
+Checkout page
+![Checkout Page](screenshots/checkout.png)
+
+Order Confimation page
+![Order Confimation Page](screenshots/order-confirmation-page.png)
+
+Profile page
+![Profile Page](screenshots/profile-page.png)
+
+Admin dashboard page
+![Admin dashboard Page](screenshots/admin-dashboard.png)
 
 ## License
 
